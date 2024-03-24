@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bloob wif hat</title>
+    <link rel="stylesheet" href="https://unpkg.com/98.css@0.1.20">
+    <style>
+        body {
+            background-image: url('i.imgur.com/MRiSVVv.jpg');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .window {
+            user-select: none;
+            position: absolute;
+        }
+        #draggable-window {
+            width: 330px;
+            box-sizing: border-box;
+        }
+        .title-bar {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .window-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .window-body img {
+            max-width: 100%;
+            height: auto;
+        }
+        .buttons-group {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            padding: 4px 0;
+        }
+        a.button-link {
+            flex: 1;
+            margin: 0 4px;
+            color: black;
+            text-decoration: none;
+            background: buttonface;
+            border: 2px outset buttonface;
+            padding: 2px 8px;
+            box-sizing: border-box;
+            display: inline-block;
+            text-align: center;
+        }
+        .button-link button {
+            all: unset;
+            width: 100%;
+            display: inline-block;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="draggable-window" class="window">
+        <div class="title-bar">
+            <div class="title-bar-text">bloob wif hat</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Help"></button>
+                <button aria-label="Close"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <img src="i.imgur.com/TGPe7mV.png" alt="kovin">
+            <div class="buttons-group">
+                <a href="https://traderjoexyz.com/avalanche/trade?outputCurrency=0x694200a68B18232916353250955bE220e88c5cBB" target="_blank" class="button-link"><button>Buy</button></a>
+                <a href="https://twitter.com/kovinsegnocchi" target="_blank" class="button-link"><button>Twitter</button></a>
+                <a href="https://t.me/kovinsegnocchi" target="_blank" class="button-link"><button>Telegram</button></a>
+                <a href="https://www.dextools.io/app/en/avalanche/pair-explorer/0x96bbdb6811d47b1199d444d507de623a905d63f3?t=1710162800117" target="_blank" class="button-link"><button>Chart</button></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dragWindow = document.getElementById('draggable-window');
+            let active = false;
+            let currentX;
+            let currentY;
+            let initialX;
+            let initialY;
+            let xOffset = 0;
+            let yOffset = 0;
+
+            const setTranslate = (xPos, yPos, el) => {
+                el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+            };
+
+            const dragStart = (e) => {
+                initialX = e.clientX - xOffset;
+                initialY = e.clientY - yOffset;
+                if (e.target === dragWindow) {
+                    active = true;
+                }
+            };
+
+            const dragEnd = (e) => {
+                initialX = currentX;
+                initialY = currentY;
+                active = false;
+            };
+
+            const drag = (e) => {
+                if (active) {
+                    e.preventDefault();
+                    currentX = e.clientX - initialX;
+                    currentY = e.clientY - initialY;
+                    xOffset = currentX;
+                    yOffset = currentY;
+                    setTranslate(currentX, currentY, dragWindow);
+                }
+            };
+
+            dragWindow.addEventListener('mousedown', dragStart, false);
+            document.addEventListener('mouseup', dragEnd, false);
+            document.addEventListener('mousemove', drag, false);
+        });
+    </script>
+</body>
+
+</html>
